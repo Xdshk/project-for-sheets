@@ -122,51 +122,19 @@ function parseOrderEmail(body) {
 }
 
 
-function formatReserveDate(dateStr) {
+function formatTourDate(dateStr) {
 
   if (!dateStr) return "";
 
+  const [day, month] = dateStr.split(".");
 
+  const months = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
 
-  const monthsMap = {
-
-    "янв": "янв", "фев": "фев", "мар": "мар", "апр": "апр", "май": "май", "июн": "июн",
-
-    "июл": "июл", "авг": "авг", "сен": "сен", "окт": "окт", "ноя": "ноя", "дек": "дек",
-
-    "января": "янв", "февраля": "фев", "марта": "мар", "апреля": "апр", "мая": "май", "июня": "июн",
-
-    "июля": "июл", "августа": "авг", "сентября": "сен", "октября": "окт", "ноября": "ноя", "декабря": "дек"
-
-  };
-
-  const dayMatch = dateStr.match(/\d+/);
-
-  if (!dayMatch) return dateStr;
-
-  const day = parseInt(dayMatch[0], 10);
-
-  let foundMonth = "";
-
-  const lowerDate = dateStr.toLowerCase();
-
-  for (let key in monthsMap) {
-
-    if (lowerDate.includes(key)) {
-
-      foundMonth = monthsMap[key];
-
-      break;
-
-    }
-
-  }
-
-
-
-  return foundMonth ? `${day}-${foundMonth}` : dateStr;
+  return `${parseInt(day, 10)}-${months[parseInt(month, 10) - 1]}`;
 
 }
+
+
 
 function logError(logSheet, error, messageId) {
 
