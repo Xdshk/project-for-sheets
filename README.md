@@ -1,2 +1,2 @@
 # project-for-sheets
-Xd
+project for google sheets, in this project i'm import information from usual mail to google sheets
