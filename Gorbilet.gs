@@ -1,7 +1,3 @@
-/**
- * Gorbilet parser — только функции для Горбилета
- */
-
 function processGorbiletOrders() {
   const SHEET_NAME = "Автомат";
   const SEARCH_QUERY = 'from:Горбилет subject:("Оплачен заказ") newer_than:1d';
@@ -113,4 +109,25 @@ function parseGorbiletEmail(body) {
     console.error("Ошибка парсинга Горбилет: " + e.message);
   }
   return results;
+}
+
+function formatTourDate(dateStr) {
+
+  if (!dateStr) return "";
+
+  const [day, month] = dateStr.split(".");
+
+  const months = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+
+  return `${parseInt(day, 10)}-${months[parseInt(month, 10) - 1]}`;
+
+}
+
+
+function logError(logSheet, error, messageId) {
+
+  const now = new Date();
+
+  logSheet.appendRow([now, messageId, error.toString()]);
+
 }
